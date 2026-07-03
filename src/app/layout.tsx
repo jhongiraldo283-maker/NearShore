@@ -13,9 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Recruiting Automation Workflow | Nearshore Business Solutions",
-  description:
-    "AI & automation workflow for sourcing, scoring, engaging and booking candidates for the Senior Full Stack Engineer role.",
+  title: "Senior Full Stack Engineer | Nearshore Business Solutions",
+  description: "Apply for the Senior Full Stack Engineer role at Nearshore Business Solutions.",
 };
 
 export default function RootLayout({
