@@ -152,6 +152,11 @@ sorted so booked/high-scoring candidates surface first.*
 - **Duplicate candidates are merged before scoring.** The same person applying via two
   channels (e.g. LinkedIn + referral) is deduped by email/phone so they're scored once, not
   twice with possibly conflicting results.
-- **Demo-specific simplification:** the working demo covers a single hardcoded role and uses
-  a lightweight self-serve slot picker instead of a real calendar integration, and skips the
-  conversational pre-screen chat — both called out inline above where the production design differs.
+- **Demo-specific simplification:** the working demo supports any number of recruiter-published
+  roles (not just one hardcoded role), sends real scheduling emails via Resend once a
+  recruiter reviews and approves a candidate, and lets the candidate self-serve a slot from
+  a lightweight generated calendar instead of a real Calendly/HubSpot Meetings integration.
+  It still skips the conversational pre-screen chat and does not integrate with a real
+  ATS/CRM or LinkedIn's posting API — the recruiter copies the AI-generated post text to
+  LinkedIn manually, and Resend's sandbox mode (no verified sending domain) only delivers
+  scheduling emails to the address the demo's Resend account was created with.

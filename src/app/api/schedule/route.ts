@@ -1,20 +1,20 @@
 import { NextResponse } from "next/server";
 import { generateSlots } from "@/lib/slots";
-import { bookSlot } from "@/lib/db";
+import { bookSlotByToken } from "@/lib/db";
 
 export const runtime = "nodejs";
 
 export async function POST(request: Request) {
-  let body: { candidateId?: number; slotIso?: string };
+  let body: { token?: string; slotIso?: string };
   try {
     body = await request.json();
   } catch {
     return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
   }
 
-  const { candidateId, slotIso } = body;
-  if (!candidateId || !slotIso) {
-    return NextResponse.json({ error: "Missing 'candidateId' or 'slotIso'." }, { status: 400 });
+  const { token, slotIso } = body;
+  if (!token || !slotIso) {
+    return NextResponse.json({ error: "Missing 'token' or 'slotIso'." }, { status: 400 });
   }
 
   const validSlots = new Set(generateSlots().map((s) => s.iso));
@@ -23,10 +23,10 @@ export async function POST(request: Request) {
   }
 
   try {
-    const candidate = await bookSlot(candidateId, slotIso);
+    const candidate = await bookSlotByToken(token, slotIso);
     if (!candidate) {
       return NextResponse.json(
-        { error: "That slot was just taken, or this candidate already has a booking. Please pick another." },
+        { error: "Ese horario ya fue tomado, o este link ya no está disponible para agendar. Contacta al reclutador." },
         { status: 409 }
       );
     }

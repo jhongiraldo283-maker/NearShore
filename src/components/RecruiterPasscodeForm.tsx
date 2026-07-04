@@ -34,7 +34,7 @@ export function RecruiterPasscodeForm() {
 
   return (
     <div className="mx-auto mt-24 max-w-sm px-6">
-      <h1 className="text-lg font-semibold text-slate-900 dark:text-slate-100">Recruiter access</h1>
+      <h1 className="text-lg font-semibold text-slate-900">Recruiter access</h1>
       <form onSubmit={handleSubmit} className="mt-4">
         <input
           type="password"
@@ -42,7 +42,7 @@ export function RecruiterPasscodeForm() {
           onChange={(e) => setPasscode(e.target.value)}
           placeholder="Passcode"
           autoFocus
-          className="w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
+          className="w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
         />
         <button
           type="submit"
@@ -51,7 +51,7 @@ export function RecruiterPasscodeForm() {
         >
           {submitting ? "Checking..." : "Enter"}
         </button>
-        {error && <p className="mt-3 text-sm text-rose-600 dark:text-rose-400">{error}</p>}
+        {error && <p className="mt-3 text-sm text-rose-600">{error}</p>}
       </form>
     </div>
   );
