@@ -64,6 +64,12 @@ body {
   animation: brand-shimmer 6s linear infinite;
 }
 
+.btn-brand-animated {
+  background: linear-gradient(90deg, var(--primary), var(--primary-hover), #ffb199, var(--primary));
+  background-size: 300% 100%;
+  animation: brand-shimmer 6s linear infinite;
+}
+
 @keyframes fade-in-up {
   from {
     opacity: 0;

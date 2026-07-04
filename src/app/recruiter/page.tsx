@@ -22,7 +22,7 @@ export default async function RecruiterHome() {
         </div>
         <Link
           href="/recruiter/vacancies/new"
-          className="rounded-lg bg-action px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-action-hover hover:scale-[1.02] active:scale-[0.98]"
+          className="btn-brand-animated rounded-lg px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:scale-[1.02] active:scale-[0.98]"
         >
           + Post a role
         </Link>

@@ -56,9 +56,8 @@ location/timezone unclear from the CV).
 Give:
 - fitScore: 0-100 overall match.
 - verdict: "strong", "borderline", or "weak".
-- strengths: short bullet points — skills/experience that match (razones a favor).
-- gaps: short bullet points — real gaps AND uncertain/unverifiable claims (razones en contra
-  o inciertas).
+- strengths: short bullet points — skills/experience that match.
+- gaps: short bullet points — real gaps AND uncertain/unverifiable claims.
 - estOverlapRisk: "none", "possible", or "high".
 - englishFluencySignal: "strong", "unclear", or "weak" — based on written evidence, not the
   self-report alone.

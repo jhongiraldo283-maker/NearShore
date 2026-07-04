@@ -127,7 +127,7 @@ export function VacancyForm() {
       <button
         type="submit"
         disabled={submitting}
-        className="mt-6 rounded-lg bg-action px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-action-hover hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+        className="btn-brand-animated mt-6 rounded-lg px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 disabled:animate-none"
       >
         {submitting ? "Posting..." : "Post role"}
       </button>
