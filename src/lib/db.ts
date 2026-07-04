@@ -343,6 +343,14 @@ export async function setVacancyStatus(id: number, status: VacancyStatus): Promi
   await db`UPDATE vacancies SET status = ${status} WHERE id = ${id}`;
 }
 
+export async function deleteVacancy(id: number): Promise<boolean> {
+  await ensureSchema();
+  const db = sql();
+  await db`DELETE FROM candidates WHERE vacancy_id = ${id}`;
+  const rows = await db`DELETE FROM vacancies WHERE id = ${id} RETURNING id`;
+  return rows.length > 0;
+}
+
 export async function isEmailDiscarded(email: string): Promise<boolean> {
   await ensureSchema();
   const db = sql();

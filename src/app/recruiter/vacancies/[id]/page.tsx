@@ -4,6 +4,7 @@ import { appUrl } from "@/lib/email";
 import { CandidateRow } from "@/components/CandidateRow";
 import { CopyButton } from "@/components/CopyButton";
 import { VacancyToggleButton } from "@/components/VacancyToggleButton";
+import { DeleteVacancyButton } from "@/components/DeleteVacancyButton";
 import { BackLink } from "@/components/BackLink";
 
 export const dynamic = "force-dynamic";
@@ -49,6 +50,7 @@ export default async function VacancyDetailPage({ params }: { params: Promise<{ 
             {vacancy.status === "open" ? "Open" : "Closed"}
           </span>
           <VacancyToggleButton vacancyId={vacancy.id} status={vacancy.status} />
+          <DeleteVacancyButton vacancyId={vacancy.id} />
         </div>
       </div>
 
