@@ -15,12 +15,12 @@ export function VacancyToggleButton({ vacancyId, status }: { vacancyId: number; 
       const res = await fetch(`/api/vacancies/${vacancyId}/toggle`, { method: "POST" });
       const data = await res.json();
       if (!res.ok) {
-        setError(data.error || "No se pudo actualizar la vacante.");
+        setError(data.error || "Could not update the role.");
         return;
       }
       router.refresh();
     } catch {
-      setError("No se pudo conectar con el servidor.");
+      setError("Could not reach the server.");
     } finally {
       setBusy(false);
     }
@@ -32,11 +32,11 @@ export function VacancyToggleButton({ vacancyId, status }: { vacancyId: number; 
         type="button"
         onClick={handleToggle}
         disabled={busy}
-        className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:border-primary disabled:cursor-not-allowed disabled:opacity-50"
+        className="rounded-lg border border-slate-300 bg-surface px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:scale-[1.03] hover:border-action active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-50"
       >
-        {busy ? "Actualizando..." : status === "open" ? "Cerrar vacante" : "Reabrir vacante"}
+        {busy ? "Updating..." : status === "open" ? "Close role" : "Reopen role"}
       </button>
-      {error && <p className="text-xs text-rose-600">{error}</p>}
+      {error && <p className="animate-fade-in-up text-xs text-rose-600">{error}</p>}
     </div>
   );
 }

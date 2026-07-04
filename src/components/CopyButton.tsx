@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export function CopyButton({ text, label = "Copiar" }: { text: string; label?: string }) {
+export function CopyButton({ text, label = "Copy" }: { text: string; label?: string }) {
   const [copied, setCopied] = useState(false);
 
   async function handleCopy() {
@@ -19,9 +19,13 @@ export function CopyButton({ text, label = "Copiar" }: { text: string; label?: s
     <button
       type="button"
       onClick={handleCopy}
-      className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:border-primary"
+      className={`rounded-lg border px-3 py-1.5 text-xs font-semibold transition hover:scale-[1.03] active:scale-[0.97] ${
+        copied
+          ? "animate-pop-in border-emerald-300 bg-emerald-50 text-emerald-700"
+          : "border-slate-300 bg-surface text-slate-700 hover:border-action"
+      }`}
     >
-      {copied ? "¡Copiado!" : label}
+      {copied ? "Copied!" : label}
     </button>
   );
 }

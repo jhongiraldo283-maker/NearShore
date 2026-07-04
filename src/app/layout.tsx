@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Nearshore Recruiting",
-  description: "Plataforma de reclutamiento de Nearshore Business Solutions.",
+  description: "Nearshore Business Solutions recruiting platform.",
 };
 
 export default function RootLayout({
@@ -28,7 +28,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-slate-50">
+      <body className="min-h-full flex flex-col bg-background">
         <SiteHeader />
         <div className="flex flex-1 flex-col">{children}</div>
       </body>

@@ -27,19 +27,18 @@ export async function sendSchedulingEmail(params: {
 
   const html = `
     <div style="font-family: Arial, Helvetica, sans-serif; max-width: 480px; margin: 0 auto; color: #0f172a;">
-      <p>Hola ${firstName},</p>
+      <p>Hi ${firstName},</p>
       <p>
-        Gracias por tu interés en la posición de <strong>${params.vacancyTitle}</strong> en
-        Nearshore Business Solutions. Nos gustaría agendar una llamada breve con un
-        reclutador.
+        Thanks for your interest in the <strong>${params.vacancyTitle}</strong> position at
+        Nearshore Business Solutions. We'd like to schedule a short call with a recruiter.
       </p>
       <p>
-        <a href="${url}" style="display: inline-block; background: #4f46e5; color: #ffffff; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600;">
-          Elegir un horario
+        <a href="${url}" style="display: inline-block; background: #111827; color: #ffffff; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600;">
+          Pick a time
         </a>
       </p>
-      <p style="font-size: 13px; color: #475569;">Si el botón no funciona, copia y pega este link: ${url}</p>
-      <p>¡Hablamos pronto!<br />Equipo de Reclutamiento</p>
+      <p style="font-size: 13px; color: #475569;">If the button doesn't work, copy and paste this link: ${url}</p>
+      <p>Talk soon!<br />Recruiting Team</p>
     </div>
   `;
 
@@ -48,7 +47,7 @@ export async function sendSchedulingEmail(params: {
     const { error } = await resend.emails.send({
       from,
       to: params.to,
-      subject: `Agenda tu llamada para ${params.vacancyTitle}`,
+      subject: `Schedule your call for ${params.vacancyTitle}`,
       html,
     });
     if (error) return { ok: false, error: error.message };

@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     const candidate = await bookSlotByToken(token, slotIso);
     if (!candidate) {
       return NextResponse.json(
-        { error: "Ese horario ya fue tomado, o este link ya no está disponible para agendar. Contacta al reclutador." },
+        { error: "That time was just taken, or this link is no longer available for scheduling. Contact the recruiter." },
         { status: 409 }
       );
     }

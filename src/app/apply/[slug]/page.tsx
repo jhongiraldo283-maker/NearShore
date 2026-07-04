@@ -10,8 +10,8 @@ export default async function ApplyPage({ params }: { params: Promise<{ slug: st
   if (!vacancy) {
     return (
       <div className="mx-auto w-full max-w-2xl px-6 py-16 text-center animate-fade-in-up">
-        <h1 className="text-xl font-bold text-slate-900">Vacante no encontrada</h1>
-        <p className="mt-2 text-sm text-slate-600">Este link de aplicación no es válido.</p>
+        <h1 className="text-xl font-bold text-slate-900">Role not found</h1>
+        <p className="mt-2 text-sm text-slate-600">This application link isn&apos;t valid.</p>
       </div>
     );
   }
@@ -19,9 +19,10 @@ export default async function ApplyPage({ params }: { params: Promise<{ slug: st
   if (vacancy.status === "closed") {
     return (
       <div className="mx-auto w-full max-w-2xl px-6 py-16 text-center animate-fade-in-up">
-        <h1 className="text-xl font-bold text-slate-900">Vacante cerrada</h1>
+        <h1 className="text-xl font-bold text-slate-900">This role is closed</h1>
         <p className="mt-2 text-sm text-slate-600">
-          Esta vacante ya no está disponible. ¡Gracias por tu interés en Nearshore Business Solutions!
+          This role is no longer accepting applications. Thanks for your interest in Nearshore Business
+          Solutions!
         </p>
       </div>
     );
@@ -42,12 +43,12 @@ export default async function ApplyPage({ params }: { params: Promise<{ slug: st
           ))}
         </div>
         <p className="mt-4 text-slate-600">
-          {vacancy.seniority} · {vacancy.yearsExperience}+ años de experiencia · {vacancy.language} ·{" "}
+          {vacancy.seniority} · {vacancy.yearsExperience}+ years of experience · {vacancy.language} ·{" "}
           {vacancy.timezoneOverlap} · {vacancy.salaryRange}
         </p>
         <p className="mt-4 text-slate-600">
-          Aplica abajo. Revisamos cada aplicación con ayuda de IA y, si tu perfil es un buen match, un
-          reclutador te contactará por correo para agendar una llamada.
+          Apply below. We review every application with AI assistance and, if your profile is a good
+          match, a recruiter will reach out by email to schedule a call.
         </p>
       </header>
 

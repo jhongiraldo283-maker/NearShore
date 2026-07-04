@@ -12,7 +12,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
 
   try {
     const candidate = await discardCandidate(candidateId);
-    if (!candidate) return NextResponse.json({ error: "Candidato no encontrado." }, { status: 404 });
+    if (!candidate) return NextResponse.json({ error: "Candidate not found." }, { status: 404 });
     return NextResponse.json({ candidate });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error discarding candidate.";

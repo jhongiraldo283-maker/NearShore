@@ -10,8 +10,8 @@ export default async function SchedulePage({ params }: { params: Promise<{ token
   if (!candidate) {
     return (
       <div className="mx-auto w-full max-w-2xl px-6 py-16 text-center animate-fade-in-up">
-        <h1 className="text-xl font-bold text-slate-900">Link no válido</h1>
-        <p className="mt-2 text-sm text-slate-600">Este link de agendamiento no existe o ya expiró.</p>
+        <h1 className="text-xl font-bold text-slate-900">Invalid link</h1>
+        <p className="mt-2 text-sm text-slate-600">This scheduling link doesn&apos;t exist or has expired.</p>
       </div>
     );
   }
@@ -19,9 +19,9 @@ export default async function SchedulePage({ params }: { params: Promise<{ token
   if (candidate.status === "scheduled") {
     return (
       <div className="mx-auto w-full max-w-2xl px-6 py-16 text-center animate-fade-in-up">
-        <h1 className="text-xl font-bold text-slate-900">Ya tienes una llamada agendada</h1>
+        <h1 className="text-xl font-bold text-slate-900">You already have a call scheduled</h1>
         <p className="mt-2 text-sm text-slate-600">
-          Tu llamada está confirmada para{" "}
+          Your call is confirmed for{" "}
           {candidate.bookedSlot &&
             new Date(candidate.bookedSlot).toLocaleString("en-US", {
               timeZone: "America/New_York",
@@ -37,8 +37,8 @@ export default async function SchedulePage({ params }: { params: Promise<{ token
   if (candidate.status !== "invited") {
     return (
       <div className="mx-auto w-full max-w-2xl px-6 py-16 text-center animate-fade-in-up">
-        <h1 className="text-xl font-bold text-slate-900">Este link ya no está disponible</h1>
-        <p className="mt-2 text-sm text-slate-600">Contacta al reclutador directamente si necesitas reagendar.</p>
+        <h1 className="text-xl font-bold text-slate-900">This link is no longer available</h1>
+        <p className="mt-2 text-sm text-slate-600">Contact the recruiter directly if you need to reschedule.</p>
       </div>
     );
   }
@@ -48,10 +48,10 @@ export default async function SchedulePage({ params }: { params: Promise<{ token
   return (
     <div className="mx-auto w-full max-w-2xl px-6 py-16 animate-fade-in-up">
       <header className="mb-8">
-        <h1 className="text-2xl font-bold text-slate-900">Agenda tu llamada</h1>
+        <h1 className="text-2xl font-bold text-slate-900">Schedule your call</h1>
         <p className="mt-2 text-slate-600">
-          Hola {candidate.name.split(" ")[0]}, elige un horario para tu llamada con un reclutador sobre la
-          posición de {vacancy?.title ?? "esta vacante"}.
+          Hi {candidate.name.split(" ")[0]}, pick a time for your call with a recruiter about the{" "}
+          {vacancy?.title ?? "role"} position.
         </p>
       </header>
 

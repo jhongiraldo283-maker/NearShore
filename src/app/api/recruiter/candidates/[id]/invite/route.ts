@@ -13,14 +13,14 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
 
   try {
     const existing = await getCandidateById(candidateId);
-    if (!existing) return NextResponse.json({ error: "Candidato no encontrado." }, { status: 404 });
+    if (!existing) return NextResponse.json({ error: "Candidate not found." }, { status: 404 });
 
     const vacancy = await getVacancyById(existing.vacancyId);
-    if (!vacancy) return NextResponse.json({ error: "Vacante no encontrada." }, { status: 404 });
+    if (!vacancy) return NextResponse.json({ error: "Role not found." }, { status: 404 });
 
     const candidate = await inviteCandidate(candidateId);
     if (!candidate || !candidate.scheduleToken) {
-      return NextResponse.json({ error: "No se pudo invitar a este candidato en su estado actual." }, { status: 409 });
+      return NextResponse.json({ error: "Could not invite this candidate in their current status." }, { status: 409 });
     }
 
     const result = await sendSchedulingEmail({
@@ -31,7 +31,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
     });
 
     if (!result.ok) {
-      return NextResponse.json({ error: `Invitado, pero el correo no se pudo enviar: ${result.error}`, candidate }, { status: 502 });
+      return NextResponse.json({ error: `Invited, but the email could not be sent: ${result.error}`, candidate }, { status: 502 });
     }
 
     return NextResponse.json({ candidate });

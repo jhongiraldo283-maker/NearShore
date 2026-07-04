@@ -38,13 +38,13 @@ export function ScheduleForm({ token }: { token: string }) {
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.error || "No se pudo agendar ese horario.");
+        setError(data.error || "Could not book that time.");
         return;
       }
       const label = slots.find((s) => s.iso === selectedSlot)?.label || selectedSlot;
       setBookedLabel(label);
     } catch {
-      setError("No se pudo conectar con el servidor.");
+      setError("Could not reach the server.");
     } finally {
       setBooking(false);
     }
@@ -53,21 +53,21 @@ export function ScheduleForm({ token }: { token: string }) {
   if (bookedLabel) {
     return (
       <div className="animate-fade-in-up rounded-xl border border-emerald-200 bg-emerald-50 p-6 text-center">
-        <p className="text-lg font-semibold text-emerald-900">¡Listo, quedaste agendado!</p>
+        <p className="text-lg font-semibold text-emerald-900">You&apos;re booked!</p>
         <p className="mt-2 text-sm text-emerald-800">
-          Tu llamada con un reclutador quedó confirmada para <span className="font-medium">{bookedLabel}</span>.
+          Your call with a recruiter is confirmed for <span className="font-medium">{bookedLabel}</span>.
         </p>
       </div>
     );
   }
 
   return (
-    <div className="animate-fade-in-up rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div className="animate-fade-in-up rounded-xl border border-slate-200 bg-surface p-6 shadow-sm">
       {loading ? (
-        <p className="text-sm text-slate-500">Cargando horarios disponibles...</p>
+        <p className="text-sm text-slate-500">Loading available times...</p>
       ) : slots.length === 0 ? (
         <p className="text-sm text-slate-500">
-          No hay horarios disponibles en este momento. Contacta al reclutador directamente.
+          No times are available right now. Contact the recruiter directly.
         </p>
       ) : (
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
@@ -76,10 +76,10 @@ export function ScheduleForm({ token }: { token: string }) {
               key={slot.iso}
               type="button"
               onClick={() => setSelectedSlot(slot.iso)}
-              className={`rounded-lg border px-3 py-2 text-xs font-medium transition ${
+              className={`rounded-lg border px-3 py-2 text-xs font-medium transition hover:scale-[1.03] active:scale-[0.97] ${
                 selectedSlot === slot.iso
-                  ? "border-primary bg-primary text-white"
-                  : "border-slate-300 bg-white text-slate-700 hover:border-primary"
+                  ? "border-action bg-action text-white"
+                  : "border-slate-300 bg-surface text-slate-700 hover:border-action"
               }`}
             >
               {slot.label}
@@ -92,12 +92,12 @@ export function ScheduleForm({ token }: { token: string }) {
         type="button"
         onClick={handleBook}
         disabled={!selectedSlot || booking}
-        className="mt-4 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-hover hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+        className="mt-4 rounded-lg bg-action px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-action-hover hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
       >
-        {booking ? "Agendando..." : "Confirmar horario"}
+        {booking ? "Booking..." : "Confirm time"}
       </button>
 
-      {error && <p className="mt-4 rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700">{error}</p>}
+      {error && <p className="animate-fade-in-up mt-4 rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700">{error}</p>}
     </div>
   );
 }

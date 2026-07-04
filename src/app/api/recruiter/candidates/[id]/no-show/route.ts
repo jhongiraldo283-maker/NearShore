@@ -13,7 +13,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
   try {
     const candidate = await markNoShow(candidateId);
     if (!candidate) {
-      return NextResponse.json({ error: "Este candidato no tiene una llamada agendada." }, { status: 409 });
+      return NextResponse.json({ error: "This candidate doesn't have a scheduled call." }, { status: 409 });
     }
     return NextResponse.json({ candidate });
   } catch (err) {

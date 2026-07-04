@@ -20,7 +20,6 @@ export default async function VacancyDetailPage({ params }: { params: Promise<{ 
   const discarded = candidates.filter((c) => c.status === "discarded");
 
   const applyUrl = `${appUrl()}/apply/${vacancy.slug}`;
-  const postText = vacancy.postText.replaceAll("{{APPLY_LINK}}", applyUrl);
 
   return (
     <div className="mx-auto w-full max-w-4xl px-6 py-16 animate-fade-in-up">
@@ -28,7 +27,7 @@ export default async function VacancyDetailPage({ params }: { params: Promise<{ 
         <div>
           <h1 className="text-2xl font-bold text-slate-900">{vacancy.title}</h1>
           <p className="mt-1 text-sm text-slate-600">
-            {vacancy.seniority} · {vacancy.yearsExperience}+ años · {vacancy.language} · {vacancy.timezoneOverlap} ·{" "}
+            {vacancy.seniority} · {vacancy.yearsExperience}+ years · {vacancy.language} · {vacancy.timezoneOverlap} ·{" "}
             {vacancy.salaryRange}
           </p>
           <div className="mt-2 flex flex-wrap gap-1.5">
@@ -45,34 +44,28 @@ export default async function VacancyDetailPage({ params }: { params: Promise<{ 
               vacancy.status === "open" ? "bg-emerald-100 text-emerald-800" : "bg-slate-200 text-slate-700"
             }`}
           >
-            {vacancy.status === "open" ? "Abierta" : "Cerrada"}
+            {vacancy.status === "open" ? "Open" : "Closed"}
           </span>
           <VacancyToggleButton vacancyId={vacancy.id} status={vacancy.status} />
         </div>
       </div>
 
-      <div className="mt-8 rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md">
+      <div className="mt-8 rounded-xl border border-slate-200 bg-surface p-5 shadow-sm transition hover:shadow-md">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <h2 className="text-sm font-semibold text-slate-900">Link de aplicación</h2>
-          <CopyButton text={applyUrl} label="Copiar link" />
+          <h2 className="text-sm font-semibold text-slate-900">Application link</h2>
+          <CopyButton text={applyUrl} label="Copy link" />
         </div>
-        <p className="mt-1 break-all text-sm text-primary">{applyUrl}</p>
-
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
-          <h2 className="text-sm font-semibold text-slate-900">Post generado para LinkedIn</h2>
-          <CopyButton text={postText} label="Copiar post" />
-        </div>
-        <p className="mt-1 whitespace-pre-wrap rounded-lg bg-slate-50 px-3 py-2 text-sm text-slate-700">{postText}</p>
+        <p className="mt-1 break-all text-sm text-slate-700">{applyUrl}</p>
       </div>
 
       <div className="mt-8">
         <h2 className="text-lg font-semibold text-slate-900">
-          Candidatos ({active.length})
+          Candidates ({active.length})
         </h2>
-        <p className="mt-1 text-sm text-slate-600">Ordenados de mayor a menor % de match.</p>
+        <p className="mt-1 text-sm text-slate-600">Sorted from highest to lowest match.</p>
 
         <div className="mt-4 space-y-4">
-          {active.length === 0 && <p className="text-sm text-slate-500">Todavía no hay candidatos activos.</p>}
+          {active.length === 0 && <p className="text-sm text-slate-500">No active candidates yet.</p>}
           {active.map((c, i) => (
             <div key={c.id} className="stagger-item" style={{ animationDelay: `${i * 40}ms` }}>
               <CandidateRow candidate={c} />
@@ -83,8 +76,8 @@ export default async function VacancyDetailPage({ params }: { params: Promise<{ 
 
       {discarded.length > 0 && (
         <details className="mt-8">
-          <summary className="cursor-pointer text-sm font-semibold text-slate-700 transition hover:text-primary">
-            Ver descartados ({discarded.length})
+          <summary className="cursor-pointer text-sm font-semibold text-slate-700 transition hover:text-slate-950">
+            View discarded ({discarded.length})
           </summary>
           <div className="mt-4 space-y-4">
             {discarded.map((c) => (

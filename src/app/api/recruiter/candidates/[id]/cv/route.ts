@@ -12,7 +12,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
 
   try {
     const cv = await getCandidateCv(candidateId);
-    if (!cv) return NextResponse.json({ error: "CV no encontrado." }, { status: 404 });
+    if (!cv) return NextResponse.json({ error: "CV not found." }, { status: 404 });
 
     const bytes = Buffer.from(cv.base64, "base64");
     return new NextResponse(new Uint8Array(bytes), {

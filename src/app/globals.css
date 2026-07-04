@@ -1,24 +1,32 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #f1f3f5;
+  --surface: #ffffff;
   --foreground: #171717;
   color-scheme: light;
 
-  /* Nearshore brand palette */
+  /* Nearshore brand palette — reserved for accents (logo, header bar), not buttons */
   --primary: #ee4423;
   --primary-hover: #c62828;
   --primary-soft: #fdece7;
   --primary-soft-hover: #fbdccf;
+
+  /* Neutral action palette used for interactive buttons */
+  --action: #111827;
+  --action-hover: #1f2937;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-primary-hover: var(--primary-hover);
   --color-primary-soft: var(--primary-soft);
   --color-primary-soft-hover: var(--primary-soft-hover);
+  --color-action: var(--action);
+  --color-action-hover: var(--action-hover);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -40,6 +48,22 @@ body {
   color: transparent;
 }
 
+@keyframes brand-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.brand-bar {
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-hover), #ffb199, var(--primary));
+  background-size: 200% 100%;
+  animation: brand-shimmer 6s linear infinite;
+}
+
 @keyframes fade-in-up {
   from {
     opacity: 0;
@@ -57,6 +81,21 @@ body {
 
 .stagger-item {
   animation: fade-in-up 0.35s ease-out both;
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-pop-in {
+  animation: pop-in 0.2s ease-out both;
 }
 
 /* Smooth expand/collapse without a fixed max-height (grid-rows trick). */

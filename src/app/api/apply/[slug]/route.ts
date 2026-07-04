@@ -108,10 +108,10 @@ async function handleApply(request: Request, paramsPromise: Promise<{ slug: stri
     return NextResponse.json({ error: message }, { status: 502 });
   }
   if (!vacancy) {
-    return NextResponse.json({ error: "Vacante no encontrada." }, { status: 404 });
+    return NextResponse.json({ error: "Role not found." }, { status: 404 });
   }
   if (vacancy.status === "closed") {
-    return NextResponse.json({ error: "Esta vacante ya no está disponible.", closed: true }, { status: 410 });
+    return NextResponse.json({ error: "This role is no longer accepting applications.", closed: true }, { status: 410 });
   }
 
   const apiKey = process.env.GEMINI_API_KEY;
@@ -123,7 +123,7 @@ async function handleApply(request: Request, paramsPromise: Promise<{ slug: stri
   try {
     form = await request.formData();
   } catch {
-    return NextResponse.json({ error: "Formulario inválido." }, { status: 400 });
+    return NextResponse.json({ error: "Invalid form data." }, { status: 400 });
   }
 
   const name = String(form.get("name") || "").trim();
@@ -133,22 +133,22 @@ async function handleApply(request: Request, paramsPromise: Promise<{ slug: stri
   const englishSelfLevel = String(form.get("englishSelfLevel") || "").trim();
   const cvFile = form.get("cv");
 
-  if (!name) return NextResponse.json({ error: "Falta el nombre completo." }, { status: 400 });
+  if (!name) return NextResponse.json({ error: "Full name is required." }, { status: 400 });
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return NextResponse.json({ error: "Email inválido." }, { status: 400 });
+    return NextResponse.json({ error: "Invalid email address." }, { status: 400 });
   }
   if (!Number.isFinite(yearsExperience) || yearsExperience < 0) {
-    return NextResponse.json({ error: "Años de experiencia inválidos." }, { status: 400 });
+    return NextResponse.json({ error: "Invalid years of experience." }, { status: 400 });
   }
-  if (!englishSelfLevel) return NextResponse.json({ error: "Falta el nivel de inglés." }, { status: 400 });
+  if (!englishSelfLevel) return NextResponse.json({ error: "English level is required." }, { status: 400 });
   if (!(cvFile instanceof File)) {
-    return NextResponse.json({ error: "Falta el CV en PDF." }, { status: 400 });
+    return NextResponse.json({ error: "A CV in PDF format is required." }, { status: 400 });
   }
   if (cvFile.type !== "application/pdf" && !cvFile.name.toLowerCase().endsWith(".pdf")) {
-    return NextResponse.json({ error: "El CV debe ser un archivo PDF." }, { status: 400 });
+    return NextResponse.json({ error: "The CV must be a PDF file." }, { status: 400 });
   }
   if (cvFile.size > MAX_CV_BYTES) {
-    return NextResponse.json({ error: "El PDF es demasiado grande (máximo 5MB)." }, { status: 400 });
+    return NextResponse.json({ error: "The PDF is too large (max 5MB)." }, { status: 400 });
   }
 
   const cvBuffer = Buffer.from(await cvFile.arrayBuffer());
@@ -159,13 +159,13 @@ async function handleApply(request: Request, paramsPromise: Promise<{ slug: stri
   } catch (err) {
     console.error("extractPdfText failed", err);
     return NextResponse.json(
-      { error: `No se pudo leer el PDF: ${err instanceof Error ? err.message : "error desconocido"}.` },
+      { error: `Could not read the PDF: ${err instanceof Error ? err.message : "unknown error"}.` },
       { status: 400 }
     );
   }
   if (!cvText) {
     return NextResponse.json(
-      { error: "No se pudo extraer texto del PDF (¿es un escaneo de imagen sin texto seleccionable?)." },
+      { error: "Could not extract text from the PDF (is it an image scan with no selectable text?)." },
       { status: 400 }
     );
   }

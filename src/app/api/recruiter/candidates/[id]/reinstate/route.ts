@@ -13,7 +13,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
   try {
     const candidate = await reinstateCandidate(candidateId);
     if (!candidate) {
-      return NextResponse.json({ error: "Este candidato no está en estado descartado." }, { status: 409 });
+      return NextResponse.json({ error: "This candidate isn't currently discarded." }, { status: 409 });
     }
     return NextResponse.json({ candidate });
   } catch (err) {

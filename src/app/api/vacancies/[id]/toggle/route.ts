@@ -12,7 +12,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
 
   try {
     const vacancy = await getVacancyById(vacancyId);
-    if (!vacancy) return NextResponse.json({ error: "Vacante no encontrada." }, { status: 404 });
+    if (!vacancy) return NextResponse.json({ error: "Role not found." }, { status: 404 });
 
     const nextStatus = vacancy.status === "open" ? "closed" : "open";
     await setVacancyStatus(vacancyId, nextStatus);
