@@ -1,7 +1,6 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { NextResponse } from "next/server";
 import { getVacancyBySlug, upsertCandidate, type ScoreResult, type Vacancy } from "@/lib/db";
-import { extractPdfText } from "@/lib/pdf";
 
 export const runtime = "nodejs";
 // PDF text extraction + the Gemini scoring call can take longer than Vercel's default
@@ -85,7 +84,20 @@ ${input.cvText}`;
 }
 
 export async function POST(request: Request, { params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
+  try {
+    return await handleApply(request, params);
+  } catch (err) {
+    // Last-resort safety net: guarantees the client always gets JSON back, even if
+    // something throws outside the specific try/catch blocks below (e.g. a dependency
+    // failing to load at call time in the serverless runtime).
+    console.error("Unhandled error in /api/apply/[slug]", err);
+    const message = err instanceof Error ? err.message : "Unknown server error.";
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
+}
+
+async function handleApply(request: Request, paramsPromise: Promise<{ slug: string }>) {
+  const { slug } = await paramsPromise;
 
   let vacancy;
   try {
@@ -142,11 +154,12 @@ export async function POST(request: Request, { params }: { params: Promise<{ slu
   const cvBuffer = Buffer.from(await cvFile.arrayBuffer());
   let cvText: string;
   try {
+    const { extractPdfText } = await import("@/lib/pdf");
     cvText = await extractPdfText(cvBuffer);
   } catch (err) {
     console.error("extractPdfText failed", err);
     return NextResponse.json(
-      { error: "No se pudo leer el PDF. Verifica que no esté corrupto o protegido con contraseña." },
+      { error: `No se pudo leer el PDF: ${err instanceof Error ? err.message : "error desconocido"}.` },
       { status: 400 }
     );
   }
