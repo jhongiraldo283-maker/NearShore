@@ -21,7 +21,7 @@ export async function sendSchedulingEmail(params: {
     return { ok: false, error: "RESEND_API_KEY is not configured on the server." };
   }
 
-  const from = process.env.RESEND_FROM || "onboarding@resend.com";
+  const from = process.env.RESEND_FROM || "onboarding@resend.dev";
   const url = scheduleUrl(params.token);
   const firstName = params.name.split(" ")[0];
 

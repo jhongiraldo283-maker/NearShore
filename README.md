@@ -41,11 +41,27 @@ get its application link.
 | `GEMINI_MODEL` | Optional, defaults to `gemini-flash-latest`. |
 | `DATABASE_URL` | Postgres connection string. Create via Vercel → Storage → Create Database → Postgres (Neon), which auto-populates this in your Vercel project. |
 | `RESEND_API_KEY` | Server-side only. Get one at [resend.com](https://resend.com) (free tier). Without a verified sending domain, Resend's sandbox mode only delivers to the email address you signed up with — that's expected for this demo. |
-| `RESEND_FROM` | Optional, defaults to `onboarding@resend.com` (Resend's shared sandbox sender). |
+| `RESEND_FROM` | Optional, defaults to `onboarding@resend.dev` (Resend's shared sandbox sender — only usable for testing, see below). |
 | `APP_URL` | Base URL used to build links inside scheduling emails, e.g. `http://localhost:3000` locally. Falls back to `https://$VERCEL_URL` in production if unset. |
 
 None of these are committed — set them in `.env.local` locally and in Vercel's project
 Environment Variables for production.
+
+### Sending real scheduling emails (Resend)
+
+Resend's free plan (no credit card) covers this comfortably: 3,000 emails/month, 100/day, one
+verified domain. Sign up at [resend.com](https://resend.com) and grab an API key from the
+dashboard — that's all you need to test.
+
+Without verifying a domain, Resend restricts you to its shared sandbox sender
+(`onboarding@resend.dev`) and only delivers to the email address your Resend account was
+created with — every other recipient gets silently rejected. That's actually convenient here:
+apply as a candidate using your own email, hit "Enviar correo de agendamiento" in `/recruiter`,
+and the invite lands in your real inbox so you can click through and book a slot yourself.
+
+To send to real candidates in production, verify a domain you own in the Resend dashboard
+(Domains → Add Domain → add the SPF/DKIM/DMARC DNS records it gives you), then set
+`RESEND_FROM` to an address on that domain (e.g. `recruiting@yourcompany.com`).
 
 ## Deploy
 
