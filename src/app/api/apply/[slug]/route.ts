@@ -87,7 +87,14 @@ ${input.cvText}`;
 export async function POST(request: Request, { params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
-  const vacancy = await getVacancyBySlug(slug);
+  let vacancy;
+  try {
+    vacancy = await getVacancyBySlug(slug);
+  } catch (err) {
+    console.error("getVacancyBySlug failed", err);
+    const message = err instanceof Error ? err.message : "Unknown error loading vacancy.";
+    return NextResponse.json({ error: message }, { status: 502 });
+  }
   if (!vacancy) {
     return NextResponse.json({ error: "Vacante no encontrada." }, { status: 404 });
   }
