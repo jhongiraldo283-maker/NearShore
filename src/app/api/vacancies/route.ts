@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { createVacancy } from "@/lib/db";
 
 export const runtime = "nodejs";
+export const maxDuration = 60;
 
 type PostTextInput = {
   title: string;

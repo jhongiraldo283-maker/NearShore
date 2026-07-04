@@ -4,6 +4,9 @@ import { getVacancyBySlug, upsertCandidate, type ScoreResult, type Vacancy } fro
 import { extractPdfText } from "@/lib/pdf";
 
 export const runtime = "nodejs";
+// PDF text extraction + the Gemini scoring call can take longer than Vercel's default
+// 10s serverless timeout; extend it (60s is the max on the Hobby plan).
+export const maxDuration = 60;
 
 const MAX_CV_BYTES = 5 * 1024 * 1024;
 

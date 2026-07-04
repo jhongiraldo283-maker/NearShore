@@ -34,15 +34,24 @@ export function ApplyForm({ slug }: { slug: string }) {
       formData.set("cv", cvFile);
 
       const res = await fetch(`/api/apply/${slug}`, { method: "POST", body: formData });
-      const data = await res.json();
+
+      let data: { error?: string };
+      try {
+        data = await res.json();
+      } catch (parseErr) {
+        console.error("Apply submit: response was not JSON", res.status, parseErr);
+        setError(`El servidor respondió con un error inesperado (HTTP ${res.status}). Mira la consola del navegador para más detalle.`);
+        return;
+      }
 
       if (!res.ok) {
         setError(data.error || "No se pudo enviar tu aplicación.");
         return;
       }
       setSubmitted(true);
-    } catch {
-      setError("No se pudo conectar con el servidor.");
+    } catch (err) {
+      console.error("Apply submit: network error", err);
+      setError("No se pudo conectar con el servidor. Abre la consola del navegador (F12) para ver el detalle del error.");
     } finally {
       setSubmitting(false);
     }
