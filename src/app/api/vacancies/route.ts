@@ -1,6 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
 import { NextResponse } from "next/server";
-import { isRecruiterRequest } from "@/lib/recruiterAuth";
 import { createVacancy } from "@/lib/db";
 
 export const runtime = "nodejs";
@@ -54,10 +53,6 @@ Rango salarial: ${input.salaryRange}`,
 }
 
 export async function POST(request: Request) {
-  if (!isRecruiterRequest(request)) {
-    return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
-  }
-
   let body: Partial<{
     title: string;
     skills: string;

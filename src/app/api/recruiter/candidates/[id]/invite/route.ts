@@ -1,15 +1,10 @@
 import { NextResponse } from "next/server";
-import { isRecruiterRequest } from "@/lib/recruiterAuth";
 import { getCandidateById, getVacancyById, inviteCandidate } from "@/lib/db";
 import { sendSchedulingEmail } from "@/lib/email";
 
 export const runtime = "nodejs";
 
 export async function POST(request: Request, { params }: { params: Promise<{ id: string }> }) {
-  if (!isRecruiterRequest(request)) {
-    return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
-  }
-
   const { id } = await params;
   const candidateId = Number(id);
   if (!Number.isInteger(candidateId)) {

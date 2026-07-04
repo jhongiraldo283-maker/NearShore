@@ -9,7 +9,7 @@ export default async function ApplyPage({ params }: { params: Promise<{ slug: st
 
   if (!vacancy) {
     return (
-      <div className="mx-auto w-full max-w-2xl px-6 py-16 text-center">
+      <div className="mx-auto w-full max-w-2xl px-6 py-16 text-center animate-fade-in-up">
         <h1 className="text-xl font-bold text-slate-900">Vacante no encontrada</h1>
         <p className="mt-2 text-sm text-slate-600">Este link de aplicación no es válido.</p>
       </div>
@@ -18,7 +18,7 @@ export default async function ApplyPage({ params }: { params: Promise<{ slug: st
 
   if (vacancy.status === "closed") {
     return (
-      <div className="mx-auto w-full max-w-2xl px-6 py-16 text-center">
+      <div className="mx-auto w-full max-w-2xl px-6 py-16 text-center animate-fade-in-up">
         <h1 className="text-xl font-bold text-slate-900">Vacante cerrada</h1>
         <p className="mt-2 text-sm text-slate-600">
           Esta vacante ya no está disponible. ¡Gracias por tu interés en Nearshore Business Solutions!
@@ -28,9 +28,9 @@ export default async function ApplyPage({ params }: { params: Promise<{ slug: st
   }
 
   return (
-    <div className="mx-auto w-full max-w-2xl px-6 py-16">
+    <div className="mx-auto w-full max-w-2xl px-6 py-16 animate-fade-in-up">
       <header className="mb-10">
-        <p className="text-sm font-semibold uppercase tracking-wide text-indigo-600">
+        <p className="text-sm font-semibold uppercase tracking-wide text-primary">
           Nearshore Business Solutions is hiring
         </p>
         <h1 className="mt-2 text-3xl font-bold text-slate-900 sm:text-4xl">{vacancy.title}</h1>

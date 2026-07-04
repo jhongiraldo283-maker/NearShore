@@ -43,7 +43,7 @@ export function VacancyForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+    <form onSubmit={handleSubmit} className="animate-fade-in-up rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
       <div>
         <label className="text-sm font-medium text-slate-700">Título del puesto</label>
         <input
@@ -51,7 +51,7 @@ export function VacancyForm() {
           onChange={(e) => setTitle(e.target.value)}
           required
           placeholder="Senior Full Stack Engineer"
-          className="mt-1 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+          className="mt-1 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none focus:border-primary focus:ring-1 focus:ring-primary"
         />
       </div>
 
@@ -62,7 +62,7 @@ export function VacancyForm() {
           onChange={(e) => setSkills(e.target.value)}
           required
           placeholder="React, Node.js, AWS"
-          className="mt-1 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+          className="mt-1 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none focus:border-primary focus:ring-1 focus:ring-primary"
         />
       </div>
 
@@ -75,7 +75,7 @@ export function VacancyForm() {
             value={yearsExperience}
             onChange={(e) => setYearsExperience(e.target.value)}
             required
-            className="mt-1 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+            className="mt-1 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none focus:border-primary focus:ring-1 focus:ring-primary"
           />
         </div>
         <div>
@@ -83,7 +83,7 @@ export function VacancyForm() {
           <select
             value={seniority}
             onChange={(e) => setSeniority(e.target.value)}
-            className="mt-1 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+            className="mt-1 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none focus:border-primary focus:ring-1 focus:ring-primary"
           >
             {SENIORITY_OPTIONS.map((s) => (
               <option key={s} value={s}>{s}</option>
@@ -99,7 +99,7 @@ export function VacancyForm() {
             value={language}
             onChange={(e) => setLanguage(e.target.value)}
             required
-            className="mt-1 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+            className="mt-1 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none focus:border-primary focus:ring-1 focus:ring-primary"
           />
         </div>
         <div>
@@ -108,7 +108,7 @@ export function VacancyForm() {
             value={timezoneOverlap}
             onChange={(e) => setTimezoneOverlap(e.target.value)}
             required
-            className="mt-1 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+            className="mt-1 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none focus:border-primary focus:ring-1 focus:ring-primary"
           />
         </div>
       </div>
@@ -120,14 +120,14 @@ export function VacancyForm() {
           onChange={(e) => setSalaryRange(e.target.value)}
           required
           placeholder="USD 3,500 - 5,000/mes"
-          className="mt-1 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+          className="mt-1 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none focus:border-primary focus:ring-1 focus:ring-primary"
         />
       </div>
 
       <button
         type="submit"
         disabled={submitting}
-        className="mt-6 rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-500 disabled:cursor-not-allowed disabled:opacity-50"
+        className="mt-6 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-hover hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
       >
         {submitting ? "Publicando..." : "Publicar vacante"}
       </button>

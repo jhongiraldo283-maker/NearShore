@@ -4,11 +4,21 @@
   --background: #ffffff;
   --foreground: #171717;
   color-scheme: light;
+
+  /* Nearshore brand palette */
+  --primary: #ee4423;
+  --primary-hover: #c62828;
+  --primary-soft: #fdece7;
+  --primary-soft-hover: #fbdccf;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-soft: var(--primary-soft);
+  --color-primary-soft-hover: var(--primary-soft-hover);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -17,4 +27,49 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.brand-gradient {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+}
+
+.brand-gradient-text {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.35s ease-out both;
+}
+
+.stagger-item {
+  animation: fade-in-up 0.35s ease-out both;
+}
+
+/* Smooth expand/collapse without a fixed max-height (grid-rows trick). */
+.expand-rows {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.25s ease;
+}
+
+.expand-rows.expanded {
+  grid-template-rows: 1fr;
+}
+
+.expand-rows > div {
+  overflow: hidden;
 }

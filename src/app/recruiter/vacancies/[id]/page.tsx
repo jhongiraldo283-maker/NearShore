@@ -1,8 +1,6 @@
 import { notFound } from "next/navigation";
 import { getVacancyById, listCandidatesForVacancy } from "@/lib/db";
 import { appUrl } from "@/lib/email";
-import { hasRecruiterSession } from "@/lib/recruiterAuth";
-import { RecruiterPasscodeForm } from "@/components/RecruiterPasscodeForm";
 import { CandidateRow } from "@/components/CandidateRow";
 import { CopyButton } from "@/components/CopyButton";
 import { VacancyToggleButton } from "@/components/VacancyToggleButton";
@@ -10,10 +8,6 @@ import { VacancyToggleButton } from "@/components/VacancyToggleButton";
 export const dynamic = "force-dynamic";
 
 export default async function VacancyDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  if (!(await hasRecruiterSession())) {
-    return <RecruiterPasscodeForm />;
-  }
-
   const { id } = await params;
   const vacancyId = Number(id);
   if (!Number.isInteger(vacancyId)) notFound();
@@ -29,7 +23,7 @@ export default async function VacancyDetailPage({ params }: { params: Promise<{ 
   const postText = vacancy.postText.replaceAll("{{APPLY_LINK}}", applyUrl);
 
   return (
-    <div className="mx-auto w-full max-w-4xl px-6 py-16">
+    <div className="mx-auto w-full max-w-4xl px-6 py-16 animate-fade-in-up">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-slate-900">{vacancy.title}</h1>
@@ -57,12 +51,12 @@ export default async function VacancyDetailPage({ params }: { params: Promise<{ 
         </div>
       </div>
 
-      <div className="mt-8 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+      <div className="mt-8 rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h2 className="text-sm font-semibold text-slate-900">Link de aplicación</h2>
           <CopyButton text={applyUrl} label="Copiar link" />
         </div>
-        <p className="mt-1 break-all text-sm text-indigo-600">{applyUrl}</p>
+        <p className="mt-1 break-all text-sm text-primary">{applyUrl}</p>
 
         <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
           <h2 className="text-sm font-semibold text-slate-900">Post generado para LinkedIn</h2>
@@ -79,15 +73,17 @@ export default async function VacancyDetailPage({ params }: { params: Promise<{ 
 
         <div className="mt-4 space-y-4">
           {active.length === 0 && <p className="text-sm text-slate-500">Todavía no hay candidatos activos.</p>}
-          {active.map((c) => (
-            <CandidateRow key={c.id} candidate={c} />
+          {active.map((c, i) => (
+            <div key={c.id} className="stagger-item" style={{ animationDelay: `${i * 40}ms` }}>
+              <CandidateRow candidate={c} />
+            </div>
           ))}
         </div>
       </div>
 
       {discarded.length > 0 && (
         <details className="mt-8">
-          <summary className="cursor-pointer text-sm font-semibold text-slate-700 hover:text-indigo-600">
+          <summary className="cursor-pointer text-sm font-semibold text-slate-700 transition hover:text-primary">
             Ver descartados ({discarded.length})
           </summary>
           <div className="mt-4 space-y-4">

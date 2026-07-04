@@ -52,7 +52,7 @@ export function ScheduleForm({ token }: { token: string }) {
 
   if (bookedLabel) {
     return (
-      <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-6 text-center">
+      <div className="animate-fade-in-up rounded-xl border border-emerald-200 bg-emerald-50 p-6 text-center">
         <p className="text-lg font-semibold text-emerald-900">¡Listo, quedaste agendado!</p>
         <p className="mt-2 text-sm text-emerald-800">
           Tu llamada con un reclutador quedó confirmada para <span className="font-medium">{bookedLabel}</span>.
@@ -62,7 +62,7 @@ export function ScheduleForm({ token }: { token: string }) {
   }
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div className="animate-fade-in-up rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
       {loading ? (
         <p className="text-sm text-slate-500">Cargando horarios disponibles...</p>
       ) : slots.length === 0 ? (
@@ -78,8 +78,8 @@ export function ScheduleForm({ token }: { token: string }) {
               onClick={() => setSelectedSlot(slot.iso)}
               className={`rounded-lg border px-3 py-2 text-xs font-medium transition ${
                 selectedSlot === slot.iso
-                  ? "border-indigo-600 bg-indigo-600 text-white"
-                  : "border-slate-300 bg-white text-slate-700 hover:border-indigo-400"
+                  ? "border-primary bg-primary text-white"
+                  : "border-slate-300 bg-white text-slate-700 hover:border-primary"
               }`}
             >
               {slot.label}
@@ -92,7 +92,7 @@ export function ScheduleForm({ token }: { token: string }) {
         type="button"
         onClick={handleBook}
         disabled={!selectedSlot || booking}
-        className="mt-4 rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-500 disabled:cursor-not-allowed disabled:opacity-50"
+        className="mt-4 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-hover hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
       >
         {booking ? "Agendando..." : "Confirmar horario"}
       </button>

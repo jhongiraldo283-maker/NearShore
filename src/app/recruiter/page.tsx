@@ -1,7 +1,5 @@
 import Link from "next/link";
 import { listVacancies } from "@/lib/db";
-import { hasRecruiterSession } from "@/lib/recruiterAuth";
-import { RecruiterPasscodeForm } from "@/components/RecruiterPasscodeForm";
 
 export const dynamic = "force-dynamic";
 
@@ -11,14 +9,10 @@ const statusStyles: Record<"open" | "closed", string> = {
 };
 
 export default async function RecruiterHome() {
-  if (!(await hasRecruiterSession())) {
-    return <RecruiterPasscodeForm />;
-  }
-
   const vacancies = await listVacancies();
 
   return (
-    <div className="mx-auto w-full max-w-4xl px-6 py-16">
+    <div className="mx-auto w-full max-w-4xl px-6 py-16 animate-fade-in-up">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-slate-900">Vacantes</h1>
@@ -28,7 +22,7 @@ export default async function RecruiterHome() {
         </div>
         <Link
           href="/recruiter/vacancies/new"
-          className="rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-500"
+          className="rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-hover hover:scale-[1.02] active:scale-[0.98]"
         >
           + Publicar vacante
         </Link>
@@ -40,11 +34,12 @@ export default async function RecruiterHome() {
             Todavía no hay vacantes publicadas.
           </p>
         )}
-        {vacancies.map((v) => (
+        {vacancies.map((v, i) => (
           <Link
             key={v.id}
             href={`/recruiter/vacancies/${v.id}`}
-            className="block rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-indigo-300"
+            style={{ animationDelay: `${i * 40}ms` }}
+            className="stagger-item block rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-primary hover:shadow-md"
           >
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>

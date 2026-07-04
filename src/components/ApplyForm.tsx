@@ -50,7 +50,7 @@ export function ApplyForm({ slug }: { slug: string }) {
 
   if (submitted) {
     return (
-      <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-6 text-center">
+      <div className="animate-fade-in-up rounded-xl border border-emerald-200 bg-emerald-50 p-6 text-center">
         <p className="text-lg font-semibold text-emerald-900">¡Gracias por aplicar!</p>
         <p className="mt-2 text-sm text-emerald-800">
           Recibimos tu aplicación. Si tu perfil es un buen match para la vacante, un reclutador te
@@ -61,7 +61,7 @@ export function ApplyForm({ slug }: { slug: string }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+    <form onSubmit={handleSubmit} className="animate-fade-in-up rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label className="text-sm font-medium text-slate-700">Nombre completo</label>
@@ -69,7 +69,7 @@ export function ApplyForm({ slug }: { slug: string }) {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
-            className="mt-1 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+            className="mt-1 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none focus:border-primary focus:ring-1 focus:ring-primary"
           />
         </div>
         <div>
@@ -79,7 +79,7 @@ export function ApplyForm({ slug }: { slug: string }) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="mt-1 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+            className="mt-1 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none focus:border-primary focus:ring-1 focus:ring-primary"
           />
         </div>
       </div>
@@ -93,7 +93,7 @@ export function ApplyForm({ slug }: { slug: string }) {
             value={yearsExperience}
             onChange={(e) => setYearsExperience(e.target.value)}
             required
-            className="mt-1 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+            className="mt-1 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none focus:border-primary focus:ring-1 focus:ring-primary"
           />
         </div>
         <div>
@@ -101,7 +101,7 @@ export function ApplyForm({ slug }: { slug: string }) {
           <select
             value={estAvailable}
             onChange={(e) => setEstAvailable(e.target.value)}
-            className="mt-1 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+            className="mt-1 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none focus:border-primary focus:ring-1 focus:ring-primary"
           >
             <option value="yes">Sí</option>
             <option value="no">No</option>
@@ -112,7 +112,7 @@ export function ApplyForm({ slug }: { slug: string }) {
           <select
             value={englishSelfLevel}
             onChange={(e) => setEnglishSelfLevel(e.target.value)}
-            className="mt-1 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+            className="mt-1 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none focus:border-primary focus:ring-1 focus:ring-primary"
           >
             {ENGLISH_LEVEL_OPTIONS.map((o) => (
               <option key={o} value={o}>{o}</option>
@@ -128,14 +128,14 @@ export function ApplyForm({ slug }: { slug: string }) {
           accept="application/pdf"
           onChange={(e) => setCvFile(e.target.files?.[0] || null)}
           required
-          className="mt-1 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none file:mr-3 file:rounded-md file:border-0 file:bg-indigo-600 file:px-3 file:py-1.5 file:text-sm file:font-semibold file:text-white focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+          className="mt-1 w-full rounded-lg border border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 outline-none file:mr-3 file:rounded-md file:border-0 file:bg-primary file:px-3 file:py-1.5 file:text-sm file:font-semibold file:text-white focus:border-primary focus:ring-1 focus:ring-primary"
         />
       </div>
 
       <button
         type="submit"
         disabled={submitting}
-        className="mt-5 rounded-lg bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-500 disabled:cursor-not-allowed disabled:opacity-50"
+        className="mt-5 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-primary-hover hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
       >
         {submitting ? "Enviando aplicación..." : "Enviar aplicación"}
       </button>

@@ -9,7 +9,7 @@ export default async function SchedulePage({ params }: { params: Promise<{ token
 
   if (!candidate) {
     return (
-      <div className="mx-auto w-full max-w-2xl px-6 py-16 text-center">
+      <div className="mx-auto w-full max-w-2xl px-6 py-16 text-center animate-fade-in-up">
         <h1 className="text-xl font-bold text-slate-900">Link no válido</h1>
         <p className="mt-2 text-sm text-slate-600">Este link de agendamiento no existe o ya expiró.</p>
       </div>
@@ -18,7 +18,7 @@ export default async function SchedulePage({ params }: { params: Promise<{ token
 
   if (candidate.status === "scheduled") {
     return (
-      <div className="mx-auto w-full max-w-2xl px-6 py-16 text-center">
+      <div className="mx-auto w-full max-w-2xl px-6 py-16 text-center animate-fade-in-up">
         <h1 className="text-xl font-bold text-slate-900">Ya tienes una llamada agendada</h1>
         <p className="mt-2 text-sm text-slate-600">
           Tu llamada está confirmada para{" "}
@@ -36,7 +36,7 @@ export default async function SchedulePage({ params }: { params: Promise<{ token
 
   if (candidate.status !== "invited") {
     return (
-      <div className="mx-auto w-full max-w-2xl px-6 py-16 text-center">
+      <div className="mx-auto w-full max-w-2xl px-6 py-16 text-center animate-fade-in-up">
         <h1 className="text-xl font-bold text-slate-900">Este link ya no está disponible</h1>
         <p className="mt-2 text-sm text-slate-600">Contacta al reclutador directamente si necesitas reagendar.</p>
       </div>
@@ -46,7 +46,7 @@ export default async function SchedulePage({ params }: { params: Promise<{ token
   const vacancy = await getVacancyById(candidate.vacancyId);
 
   return (
-    <div className="mx-auto w-full max-w-2xl px-6 py-16">
+    <div className="mx-auto w-full max-w-2xl px-6 py-16 animate-fade-in-up">
       <header className="mb-8">
         <h1 className="text-2xl font-bold text-slate-900">Agenda tu llamada</h1>
         <p className="mt-2 text-slate-600">

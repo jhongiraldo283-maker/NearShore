@@ -4,8 +4,9 @@ A working, multi-vacancy recruiting pipeline with human-in-the-loop scheduling (
 always reviews and decides before a candidate can book a call — never fully automatic).
 
 - `/` — landing page linking to the recruiter dashboard.
-- `/recruiter` — passcode-protected dashboard: publish vacancies, get an AI-drafted LinkedIn
-  post plus a unique application link per vacancy, and review each vacancy's candidate
+- `/recruiter` — internal dashboard (no login — meant to stay unlisted, not linked publicly):
+  publish vacancies, get an AI-drafted LinkedIn post plus a unique application link per
+  vacancy, and review each vacancy's candidate
   pipeline (fit score, strengths/gaps, EST overlap risk, English fluency signal, recruiter
   briefing, CV download). From there the recruiter sends a real scheduling email, discards a
   candidate (checked against a global discard list on future applications), or marks a
@@ -39,7 +40,6 @@ get its application link.
 | `GEMINI_API_KEY` | Server-side only. Get one at [Google AI Studio](https://aistudio.google.com/apikey). |
 | `GEMINI_MODEL` | Optional, defaults to `gemini-flash-latest`. |
 | `DATABASE_URL` | Postgres connection string. Create via Vercel → Storage → Create Database → Postgres (Neon), which auto-populates this in your Vercel project. |
-| `RECRUITER_PASSCODE` | Shared passcode gating `/recruiter`. Pick any string. |
 | `RESEND_API_KEY` | Server-side only. Get one at [resend.com](https://resend.com) (free tier). Without a verified sending domain, Resend's sandbox mode only delivers to the email address you signed up with — that's expected for this demo. |
 | `RESEND_FROM` | Optional, defaults to `onboarding@resend.com` (Resend's shared sandbox sender). |
 | `APP_URL` | Base URL used to build links inside scheduling emails, e.g. `http://localhost:3000` locally. Falls back to `https://$VERCEL_URL` in production if unset. |

@@ -32,7 +32,7 @@ export function VacancyToggleButton({ vacancyId, status }: { vacancyId: number; 
         type="button"
         onClick={handleToggle}
         disabled={busy}
-        className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:border-indigo-400 disabled:cursor-not-allowed disabled:opacity-50"
+        className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 transition hover:border-primary disabled:cursor-not-allowed disabled:opacity-50"
       >
         {busy ? "Actualizando..." : status === "open" ? "Cerrar vacante" : "Reabrir vacante"}
       </button>
